@@ -9,7 +9,8 @@ struct elemento
 
 struct Lista
 {
-    struct elemento *dados;
+    struct elemento *inicio;
+    struct elemento *final;
     int tamanho;
 };
 
@@ -20,29 +21,23 @@ struct Lista *criarLista()
     if (aLista != NULL)
     {
         aLista->tamanho = 0;
-        aLista->dados = NULL;
+        aLista->inicio = NULL;
     }
     return aLista;
 }
 
-int adicionarnaposicao(struct Lista *aLista, int info, int posicao)
+int adicionar(struct Lista *aLista, int info)
 {
     struct elemento *novo, *anterior;
-    if (posicao > aLista->tamanho + 1)
-    {
-        return (printf("Error(Posi)"));
-    }
-    else
-    {
-        
         novo = (struct elemento *) malloc(sizeof(struct elemento));
 
-        if (posicao == 1)
+        if (aLista->inicio == NULL)
         {
             aLista->tamanho = aLista->tamanho + 1;
             novo->info = info;
             novo->proximo = NULL;
-            aLista->dados = novo;
+            aLista->inicio = novo;
+            aLista->final = novo;
             return (aLista->tamanho);
         }
         else
@@ -53,33 +48,38 @@ int adicionarnaposicao(struct Lista *aLista, int info, int posicao)
             }
             else
             {
-                anterior = aLista->dados;
-                for (int i = 0; i < (posicao - 2); i++)
-                {
-                    anterior = anterior->proximo;
-                }
-                novo->proximo = anterior->proximo;
+                anterior = aLista->final;
                 novo->info = info;
+                novo->proximo = NULL;
                 anterior->proximo = novo;
-                aLista->tamanho = aLista->tamanho + 1;
+                aLista->final = novo;
+                aLista->tamanho = aLista->tamanho +1;
+                // anterior = aLista->inicio;
+                // for (int i = 0; i < (posicao - 2); i++)
+                // {
+                //     anterior = anterior->proximo;
+                // }
+                // novo->proximo = anterior->proximo;
+                // novo->info = info;
+                // anterior->proximo = novo;
+                // aLista->tamanho = aLista->tamanho + 1;
                 return (aLista->tamanho);
             }
         }
-    }
 }
 
 int retira(struct Lista *aLista, int valor)
 {
     struct elemento *anterior = NULL, *auxiliar;
     int *volta;
-    auxiliar = aLista->dados;
+    auxiliar = aLista->inicio;
     while (auxiliar != NULL)
     {
         if (auxiliar->info == valor)
         {
             if (anterior == NULL)
             {
-                aLista->dados = auxiliar->proximo;
+                aLista->inicio = auxiliar->proximo;
             }
             else
             {
@@ -95,7 +95,7 @@ int retira(struct Lista *aLista, int valor)
 
 int exibe(struct Lista *aLista){
     struct elemento *aux;
-    aux = aLista->dados;
+    aux = aLista->inicio;
     while(aux != NULL)
     {
         printf("%d ",aux->info);
@@ -117,7 +117,7 @@ int main()
     for (j=1; j <= pinline;j++)
     {
         scanf("%d", &temp1);
-        adicionarnaposicao(aLista, temp1, j);
+        adicionar(aLista, temp1);
         
     }
     scanf("%d", &poutline);
@@ -127,5 +127,7 @@ int main()
         retira(aLista, temp2);
     }
     exibe(aLista);
+    printf("\n");
+    free(aLista);
     return 0;
 }
