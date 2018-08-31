@@ -20,7 +20,7 @@ struct Lista * criarLista(){
         aLista->tamanho = 0;
         aLista->dados = NULL;
     }
-    return 0;
+    return aLista;
 
 }
 int adicionarnaposicao(struct Lista *aLista, int *info,int posicao){
