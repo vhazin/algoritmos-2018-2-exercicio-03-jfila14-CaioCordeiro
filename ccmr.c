@@ -96,12 +96,12 @@ int main(){
     for(int i = 0;i==pinline;i++){
         scanf("%d",&temp1);
         adicionarnaposicao(aLista, temp1,i );
-    }    
+        }    
     scanf("%d",&poutline);
     for(int a = 0;a==poutline;a++){
         scanf("%d",&temp2);
         retira(aLista,temp2);
 
-    }
+        }
     
     }
