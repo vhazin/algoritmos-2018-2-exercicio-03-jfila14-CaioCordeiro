@@ -34,12 +34,14 @@ int adicionarnaposicao(struct Lista *aLista, int info, int posicao)
     }
     else
     {
-        novo = malloc(sizeof(struct elemento));
+        
+        novo = (struct elemento *) malloc(sizeof(struct elemento));
+
         if (posicao == 1)
         {
             aLista->tamanho = aLista->tamanho + 1;
             novo->info = info;
-            novo->proximo = aLista->dados;
+            novo->proximo = NULL;
             aLista->dados = novo;
             return (aLista->tamanho);
         }
@@ -52,7 +54,7 @@ int adicionarnaposicao(struct Lista *aLista, int info, int posicao)
             else
             {
                 anterior = aLista->dados;
-                for (int i = 0; (posicao - 2); i++)
+                for (int i = 0; i < (posicao - 2); i++)
                 {
                     anterior = anterior->proximo;
                 }
@@ -68,7 +70,7 @@ int adicionarnaposicao(struct Lista *aLista, int info, int posicao)
 
 int retira(struct Lista *aLista, int valor)
 {
-    struct elemento *anterior, *auxiliar;
+    struct elemento *anterior = NULL, *auxiliar;
     int *volta;
     auxiliar = aLista->dados;
     while (auxiliar != NULL)
@@ -94,10 +96,9 @@ int retira(struct Lista *aLista, int valor)
 int exibe(struct Lista *aLista){
     struct elemento *aux;
     aux = aLista->dados;
-    printf("%d",aux->info);
     while(aux != NULL)
     {
-        printf("%d",aux->info);
+        printf("%d ",aux->info);
         aux = aux->proximo;
     }
     return 0;
@@ -109,21 +110,22 @@ int main()
     int poutline;
     int temp1;
     int temp2;
+    int j = 0;
     struct Lista *aLista;
-
     scanf("%d", &pinline);
     aLista = criarLista();
-    for (int i = 1; i == pinline; i++)
+    for (j=1; j <= pinline;j++)
     {
         scanf("%d", &temp1);
-        adicionarnaposicao(aLista, temp1, i);
+        adicionarnaposicao(aLista, temp1, j);
         
     }
     scanf("%d", &poutline);
-    for (int a = 0; a == poutline; a++)
+    for (int a = 1; a <= poutline; a++)
     {
         scanf("%d", &temp2);
         retira(aLista, temp2);
     }
     exibe(aLista);
+    return 0;
 }
