@@ -78,8 +78,30 @@ int retira(struct Lista *aLista,int valor){
     }
 
 }
+/*int exibe(struct Lista *aLista){
+    struct elemento *aux;
+    aux = aLista->
 
+}*/
 int main(){
-    
+    int pinline;
+    int poutline;
+    int temp1;
+    int temp2;
+    struct Lista *aLista;
 
-}
+    
+    scanf("%n",pinline);
+    aLista =criarLista();
+    for(int i = 0;i==pinline;i++){
+        scanf("%d",&temp1);
+        adicionarnaposicao(aLista, temp1,i );
+    }    
+    scanf("%d",&poutline);
+    for(int a = 0;a==poutline;a++){
+        scanf("%d",&temp2);
+        retira(aLista,temp2);
+
+    }
+    
+    }
