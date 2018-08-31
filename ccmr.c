@@ -24,7 +24,8 @@ struct Lista *criarLista()
     }
     return aLista;
 }
-int adicionarnaposicao(struct Lista *aLista, int *info, int posicao)
+
+int adicionarnaposicao(struct Lista *aLista, int info, int posicao)
 {
     struct elemento *novo, *anterior;
     if (posicao > aLista->tamanho + 1)
@@ -64,6 +65,7 @@ int adicionarnaposicao(struct Lista *aLista, int *info, int posicao)
         }
     }
 }
+
 int retira(struct Lista *aLista, int valor)
 {
     struct elemento *anterior, *auxiliar;
@@ -88,12 +90,20 @@ int retira(struct Lista *aLista, int valor)
         auxiliar = auxiliar->proximo;
     }
 }
-/*int exibe(struct Lista *aLista){
-    struct elemento *aux;
-    aux = aLista->
 
-}*/
-int main()
+int exibe(struct Lista *aLista){
+    struct elemento *aux;
+    aux = aLista->dados;
+    printf("%d",aux->info);
+    while(aux != NULL)
+    {
+        printf("%d",aux->info);
+        aux = aux->proximo;
+    }
+    return 0;
+}
+
+int main()  
 {
     int pinline;
     int poutline;
@@ -101,12 +111,13 @@ int main()
     int temp2;
     struct Lista *aLista;
 
-    scanf("%n", pinline);
+    scanf("%d", &pinline);
     aLista = criarLista();
-    for (int i = 0; i == pinline; i++)
+    for (int i = 1; i == pinline; i++)
     {
         scanf("%d", &temp1);
         adicionarnaposicao(aLista, temp1, i);
+        
     }
     scanf("%d", &poutline);
     for (int a = 0; a == poutline; a++)
@@ -114,4 +125,5 @@ int main()
         scanf("%d", &temp2);
         retira(aLista, temp2);
     }
+    exibe(aLista);
 }
